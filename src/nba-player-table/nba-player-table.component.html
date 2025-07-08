@@ -1,8 +1,6 @@
-<!-- src/app/components/nba-player/nba-player.component.html -->
 <div class="nba-player-container">
     <h2>Joueurs NBA</h2>
 
-    <!-- Contrôles de pagination -->
     <div class="pagination-controls">
         <div class="page-size-selector">
             <label for="pageSize">Taille de page:</label>
@@ -10,6 +8,7 @@
                 <option value="10" [selected]="pageSize === 10">10</option>
                 <option value="20" [selected]="pageSize === 20">20</option>
                 <option value="50" [selected]="pageSize === 50">50</option>
+                <option value="50" [selected]="pageSize === 100">100</option>
             </select>
         </div>
 
@@ -18,37 +17,34 @@
         </div>
     </div>
 
-    <!-- Indicateur de chargement -->
   @if (loading) {
     <div class="loading">
-      Chargement en cours...
+      Loading...
     </div>
   }
 
-    <!-- Message d'erreur -->
   @if (error) {
     <div class="error">
       {{ error }}
     </div>
   }
 
-    <!-- Tableau des joueurs -->
     @if (!loading && !error) {
     <div class="table-container">
         <table class="players-table">
             <thead>
                 <tr>
-                    <th>Prénom</th>
-                    <th>Nom</th>
-                    <th>Date de naissance</th>
-                    <th>Pays</th>
-                    <th>Année de début</th>
-                    <th>Années pro</th>
-                    <th>Taille (cm)</th>
-                    <th>Poids (kg)</th>
-                    <th>Université</th>
-                    <th>Numéro</th>
-                    <th>Statut</th>
+                    <th>Firstname</th>
+                    <th>Name</th>
+                    <th>BirthDate</th>
+                    <th>Country</th>
+                    <th>Start year</th>
+                    <th>Pro years</th>
+                    <th>Height (cm)</th>
+                    <th>Weight (kg)</th>
+                    <th>University</th>
+                    <th>Jersey n°</th>
+                    <th>Status</th>
                     <th>Position</th>
                 </tr>
             </thead>
@@ -76,7 +72,6 @@
         </tbody>
         </table>
 
-        <!-- Message si aucun joueur -->
      @if (players.length === 0) {
         <div class="no-data">
           Aucun joueur trouvé.
@@ -85,7 +80,6 @@
     </div>
 }
 
-    <!-- Boutons de navigation -->
  @if (!loading && !error) {
     <div class="pagination-buttons">
       <button 
