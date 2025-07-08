@@ -1,0 +1,42 @@
+<div class="container">
+  <h2>NBA Teams</h2>
+  
+  @if (loading) {
+    <div class="loading">
+      Chargement en cours...
+    </div>
+  }
+  
+  @if (error) {
+    <div class="error">
+      {{ error }}
+    </div>
+  }
+  
+  @if (!loading && !error) {
+    <div class="seasons-grid">
+      @for (team of teams; track team.nickname) {
+        <div class="season-card">
+          <h3>{{ team.nickname }}</h3>
+          @if (team.logo) {
+            <div class="logo-container">
+              <img 
+                [src]="team.logo" 
+                [alt]="'Team logo ' + team.logo"
+                class="team-logo"
+                (error)="onImageError($event)"
+                loading="lazy"
+              />
+            </div>
+          }
+        </div>
+      }
+      </div>
+}
+  
+  @if (!loading && !error && teams.length === 0) {
+    <div class="no-data">
+      Aucune saison trouvée
+    </div>
+  }
+</div>
