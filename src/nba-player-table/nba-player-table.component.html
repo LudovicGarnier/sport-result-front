@@ -1,0 +1,106 @@
+<!-- src/app/components/nba-player/nba-player.component.html -->
+<div class="nba-player-container">
+    <h2>Joueurs NBA</h2>
+
+    <!-- Contrôles de pagination -->
+    <div class="pagination-controls">
+        <div class="page-size-selector">
+            <label for="pageSize">Taille de page:</label>
+            <select #pageSizeSelect id="pageSize" (change)="changePageSize(+pageSizeSelect.value)">
+                <option value="10" [selected]="pageSize === 10">10</option>
+                <option value="20" [selected]="pageSize === 20">20</option>
+                <option value="50" [selected]="pageSize === 50">50</option>
+            </select>
+        </div>
+
+        <div class="page-info">
+            Page {{ currentPage + 1 }}
+        </div>
+    </div>
+
+    <!-- Indicateur de chargement -->
+  @if (loading) {
+    <div class="loading">
+      Chargement en cours...
+    </div>
+  }
+
+    <!-- Message d'erreur -->
+  @if (error) {
+    <div class="error">
+      {{ error }}
+    </div>
+  }
+
+    <!-- Tableau des joueurs -->
+    @if (!loading && !error) {
+    <div class="table-container">
+        <table class="players-table">
+            <thead>
+                <tr>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Date de naissance</th>
+                    <th>Pays</th>
+                    <th>Année de début</th>
+                    <th>Années pro</th>
+                    <th>Taille (cm)</th>
+                    <th>Poids (kg)</th>
+                    <th>Université</th>
+                    <th>Numéro</th>
+                    <th>Statut</th>
+                    <th>Position</th>
+                </tr>
+            </thead>
+             <tbody>
+          @for (player of players; track player.firstname + player.lastname + player.jerseyNumber) {
+            <tr>
+              <td>{{ player.firstname }}</td>
+              <td>{{ player.lastname }}</td>
+              <td>{{ formatDate(player.birthDate) }}</td>
+              <td>{{ player.country }}</td>
+              <td>{{ player.startYear }}</td>
+              <td>{{ player.proYear }}</td>
+              <td>{{ player.height }}</td>
+              <td>{{ player.weight }}</td>
+              <td>{{ player.college || 'N/A' }}</td>
+              <td>{{ player.jerseyNumber }}</td>
+              <td>
+                <span class="status" [class.active]="!player.isActive" [class.inactive]="player.isActive">
+                  {{ getStatusText(player.isActive) }}
+                </span>
+              </td>
+              <td>{{ player.position }}</td>
+            </tr>
+          }
+        </tbody>
+        </table>
+
+        <!-- Message si aucun joueur -->
+     @if (players.length === 0) {
+        <div class="no-data">
+          Aucun joueur trouvé.
+        </div>
+      }
+    </div>
+}
+
+    <!-- Boutons de navigation -->
+ @if (!loading && !error) {
+    <div class="pagination-buttons">
+      <button 
+        (click)="previousPage()" 
+        [disabled]="currentPage === 0"
+        class="btn btn-secondary">
+        Précédent
+      </button>
+      
+      <button 
+        (click)="nextPage()" 
+        [disabled]="players.length < pageSize"
+        class="btn btn-primary">
+        Suivant
+      </button>
+    </div>
+  }
+</div>
