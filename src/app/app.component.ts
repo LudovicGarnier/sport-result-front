@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NbaSeasonComponent } from "../nba-season/nba-season.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [NbaSeasonComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
