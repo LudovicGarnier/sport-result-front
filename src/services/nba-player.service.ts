@@ -16,7 +16,6 @@ export class NbaPlayerService {
       .set('page', page.toString())
       .set('size', size.toString())
       .set('isActive', active);
-    console.log(active);
     
     return this.http.get<NbaPlayerDto[]>(`${this.baseUrl}/nbaPlayer/active`, { params });
   }

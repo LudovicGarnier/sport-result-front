@@ -33,7 +33,7 @@ export class NbaPlayerTableComponent implements OnInit {
           this.loading = false;
         },
         error: (error) => {
-          this.error = 'Erreur lors du chargement des données';
+          this.error = 'Error while loading datas';
           this.loading = false;
           console.error('Error loading players:', error);
         }
@@ -58,7 +58,6 @@ export class NbaPlayerTableComponent implements OnInit {
     this.loadPlayers();
   }
 
-  // Méthode alternative pour gérer l'événement de changement de taille
   onPageSizeChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
     const newSize = parseInt(target.value, 10);
@@ -66,7 +65,7 @@ export class NbaPlayerTableComponent implements OnInit {
   }
 
   getStatusText(isActive: boolean): string {
-    return !isActive ? 'Actif' : 'Inactif';
+    return !isActive ? 'Active' : 'Inactive';
   }
 
   formatDate(dateString: string): string {

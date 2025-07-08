@@ -30,8 +30,8 @@ export class NbaSeasonComponent implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        console.error('Error while loading seasons:', err);
-        this.error = 'Error while loading datas. Check API access.';
+        console.error('Error While Loading Seasons:', err);
+        this.error = 'Error While Loading Datas. Check API Access.';
         this.loading = false;
       }
     });

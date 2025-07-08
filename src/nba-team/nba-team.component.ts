@@ -38,8 +38,8 @@ export class NbaTeamComponent implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        console.error('Error while loading teams:', err);
-        this.error = 'Error while loading datas. Check API access.';
+        console.error('Error While Loading Teams:', err);
+        this.error = 'Error While Loading Datas. Check API Access.';
         this.loading = false;
       }
     });
@@ -48,7 +48,7 @@ export class NbaTeamComponent implements OnInit {
    onImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
     img.style.display = 'none';
-    console.warn('Erreur lors du chargement de l\'image:', img.src);
+    console.warn('Error While Loading The Image:', img.src);
   }
 
 }

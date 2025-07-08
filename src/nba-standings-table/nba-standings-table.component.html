@@ -1,0 +1,95 @@
+<div class="nba-standings-container">
+  <h1>NBA Standings</h1>
+
+  <div class="year-selector">
+    <label for="year">Season:</label>
+    <input id="year" type="number" [formControl]="yearControl" min="2015" max="2030">
+    <button (click)="loadStandings()">Charger</button>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    Loading...
+  </div>
+
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+
+  <div class="nba-conference-standings">
+    <div *ngIf="!loading && !error && westStandings.length > 0" class="table-container">
+      <h2>WEST</h2>
+      <table class="standings-table">
+        <thead>
+          <tr>
+            <th class="team-th">Team</th>
+            <th>Conf. Rank</th>
+            <th>Victories</th>
+            <th>Defeates</th>
+            <th>Victory %</th>
+            <th>Home</th>
+            <th>Away</th>
+            <th>Last 10</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let standing of westStandings">
+            <td>
+              <div class="logo-container">
+                <img src="{{ standing.nbaTeamDto.logo }}" class="team-logo" alt="">
+                <div class="team-name"> {{ standing.nbaTeamDto.nickname }}</div>
+              </div>
+
+            </td>
+            <td>{{ standing.conferenceRank }}</td>
+            <td>{{ standing.winTotal }}</td>
+            <td>{{ standing.lossTotal }}</td>
+            <td>{{ standing.winPercentage }}</td>
+            <td>{{ standing.winHome }}-{{ standing.lossHome }}</td>
+            <td>{{ standing.winAway }}-{{ standing.lossAway }}</td>
+            <td>{{ standing.lastTenWin }}-{{ standing.lastTenLoss }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="!loading && !error && eastStandings.length > 0" class="table-container">
+      <h2>EAST</h2>
+      <table class="standings-table">
+        <thead>
+          <tr>
+            <th class="team-th">Team</th>
+            <th>Conf. Rank</th>
+            <th>Victories</th>
+            <th>Defeates</th>
+            <th>Victory %</th>
+            <th>Home</th>
+            <th>Away</th>
+            <th>Last 10</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let standing of eastStandings">
+            <td>
+              <div class="logo-container">
+                <img src="{{ standing.nbaTeamDto.logo }}" class="team-logo" alt="">
+                <div class="team-name"> {{ standing.nbaTeamDto.nickname }}</div>
+              </div>
+            </td>
+            <td>{{ standing.conferenceRank }}</td>
+            <td>{{ standing.winTotal }}</td>
+            <td>{{ standing.lossTotal }}</td>
+            <td>{{ standing.winPercentage }}</td>
+            <td>{{ standing.winHome }}-{{ standing.lossHome }}</td>
+            <td>{{ standing.winAway }}-{{ standing.lossAway }}</td>
+            <td>{{ standing.lastTenWin }}-{{ standing.lastTenLoss }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+
+  <div *ngIf="!loading && !error && eastStandings.length === 0" class="no-data">
+    No Standings For This Season.
+  </div>
+</div>
